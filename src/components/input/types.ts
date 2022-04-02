@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 
-export interface InputHandles extends HTMLAttributes<HTMLInputElement> {
+export type InputHandles = HTMLAttributes<HTMLInputElement> & JSX.IntrinsicElements['input'] & {
   label?: string,
   error?: boolean | string,
-}
+};
