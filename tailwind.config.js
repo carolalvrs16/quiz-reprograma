@@ -3,6 +3,7 @@ module.exports = {
     colors: {
       white: '#FFF',
       black: '#000',
+      transparent: 'transparent',
 
       gray: {
         400: '#5F5F6E',
@@ -12,6 +13,7 @@ module.exports = {
 
       primary: {
         200: '#4447E2',
+        400: '#272ACC',
       },
 
       error: '#EB5757',

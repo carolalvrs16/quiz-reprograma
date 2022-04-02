@@ -1,8 +1,12 @@
-import { Text } from '../components';
+import {
+  Text,
+  Input,
+  Button,
+} from '../components';
 
 const Home: React.FC = () => (
   <div className="home">
-    <div className="home-container container">
+    <div className="home-container">
       <div className="home-title">
         <Text
           label="Olá,"
@@ -18,6 +22,17 @@ const Home: React.FC = () => (
 
       <Text
         label="Preencha as informações abaixo, é rápido e fácil."
+        className="text-gray-400 mt-6 mb-14"
+      />
+
+      <Input
+        label="Data de nascimento"
+        placeholder="oi"
+      />
+
+      <Button
+        label="Próximo"
+        className="w-full mt-20"
       />
     </div>
   </div>
