@@ -1,5 +1,8 @@
+import '../styles/main.scss';
 import { AppProps } from 'next/app';
 
-const App: React.FC<AppProps> = () => <h1>Hello World!</h1>;
+const App: React.FC<AppProps> = ({ Component, pageProps }) => (
+  <Component {...pageProps} />
+);
 
 export default App;

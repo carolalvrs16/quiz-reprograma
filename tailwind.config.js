@@ -18,12 +18,17 @@ module.exports = {
       success: '#27AE60',
       warning: '#E2B93B',
     },
+    container: {
+      center: true,
+      padding: '2rem'
+    },
     fontFamily: {
       poppins: 'Poppins, sans-serif',
     },
   },
   content: [
     './src/pages/*.tsx',
+    './src/styles/*.scss',
     './src/components/**/*.tsx',
   ],
   plugins: [],

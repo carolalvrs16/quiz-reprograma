@@ -1,0 +1,11 @@
+@layer base {
+    body {
+      @apply scroll-smooth bg-gray-700 font-poppins;
+    }
+
+    h1,
+    h2 {
+      @apply text-white font-bold #{!important};
+    }
+  }
+  

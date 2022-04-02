@@ -1,0 +1,11 @@
+.home {
+  @apply h-screen items-center justify-center flex;
+
+ &-container {
+   @apply flex flex-col items-center;
+ }
+
+ &-title {
+   @apply flex flex-col gap-8 max-w-[32rem];
+ }
+}
