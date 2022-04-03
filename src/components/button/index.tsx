@@ -11,7 +11,7 @@ const Button: React.FC<ButtonHandles> = ({
     {...rest}
     type={submit ? 'submit' : 'button'}
     disabled={disabled}
-    className={`button ${className || ''}`}
+    className={`button ${className || ''} ${disabled ? 'is-disabled' : ''}`}
   >
     {label}
   </button>

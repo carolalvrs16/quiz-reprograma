@@ -1,27 +1,27 @@
 import React from 'react';
 
 import {
-    Html,
-    Head,
-    Main,
-    NextScript,
+  Html,
+  Head,
+  Main,
+  NextScript,
 } from 'next/document';
 
 const Document: React.FC = () => (
-    <Html lang="pt-BR">
+  <Html lang="pt-BR">
     <Head>
-        <link rel="icon" type="image/png" href="/favicon.ico" />
+      <link rel="icon" type="image/png" href="/favicon.ico" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"></link>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
     </Head>
     <body>
-        <Main />
+      <Main />
 
-        <NextScript />
+      <NextScript />
     </body>
-</Html>
+  </Html>
 );
 
 export default Document;

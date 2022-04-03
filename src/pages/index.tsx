@@ -2,13 +2,16 @@ import { useState } from 'react';
 
 import {
   Text,
-  Input,
   Button,
   Select,
+  Datepicker,
 } from '../components';
 
 const Home: React.FC = () => {
   const [selected, onSelected] = useState('');
+  const [startDate, onStartDate] = useState(null);
+
+  console.log(selected);
 
   return (
     <div className="home">
@@ -32,13 +35,24 @@ const Home: React.FC = () => {
         />
 
         <Select
-          label="Preencha as informaç"
+          label="Gênero"
           options={['Cis', 'Trans']}
           selected={selected}
+          className="mb-8"
+          onSelected={onSelected}
+          placeholder="Selecione uma opção"
+        />
+
+        <Datepicker
+          label="Data de nascimento"
+          start={startDate}
+          onStart={onStartDate}
+          placeholder="Selecione uma data"
         />
 
         <Button
           label="Próximo"
+          disabled
           className="w-full mt-20"
         />
       </div>
