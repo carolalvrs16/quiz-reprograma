@@ -4,4 +4,8 @@
   &:hover {
     @apply bg-primary-400;
   }
+
+  &.is-disabled {
+    @apply bg-gray-600 cursor-not-allowed text-gray-400;
+  }
 }
