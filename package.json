@@ -11,6 +11,7 @@
   "author": "Carolina Alves <carolalvrs@hotmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.26.1",
     "classnames": "^2.3.1",
     "next": "^12.1.4",
     "react": "^18.0.0",

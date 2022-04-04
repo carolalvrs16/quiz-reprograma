@@ -2,10 +2,12 @@
 
 @import "./base.scss";
 
+@import "./components/radio.scss";
 @import "./components/input.scss";
 @import "./components/button.scss";
 @import "./components/select.scss";
 
+@import "./pages/quiz.scss";
 @import "./pages/home.scss";
 
 @import "tailwindcss/components";

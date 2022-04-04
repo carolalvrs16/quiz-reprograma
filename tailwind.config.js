@@ -5,8 +5,11 @@ module.exports = {
       black: '#000',
       transparent: 'transparent',
 
+      green: '#50D86A',
+
       gray: {
         400: '#5F5F6E',
+        500: '#8E8EA9',
         600: '#2D2D3A',
         700: '#131419',
       },

@@ -1,0 +1,30 @@
+.radio {
+  @apply flex;
+
+  &-wrapper {
+    @apply bg-gray-600 w-full rounded p-6 relative flex items-center;
+  }
+
+  &-label {
+    @apply text-gray-500 ml-4;
+  }
+
+  &-target {
+    @apply top-0 left-0 w-full h-full z-10 absolute cursor-pointer opacity-0;
+  }
+
+  &-box {
+    @apply w-6 h-6 flex border-2 relative rounded-full border-gray-500 border-solid items-center justify-center;
+
+    &::after {
+      content: "";
+
+      @apply w-6 h-6 absolute bg-transparent rounded-full transition-all ease-in-out duration-300;
+    }
+  }
+
+  &.is-checked &-box::after,
+  input[type="radio"]:checked + span::after {
+    @apply w-6 h-6 bg-green;
+  }
+}

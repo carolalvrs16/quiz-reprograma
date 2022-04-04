@@ -15,7 +15,9 @@ const Text: React.FC<TextHandles> = ({
     className,
     type === 'p' ? 'text-base' : '',
     type === 'h1' ? 'text-5xl !leading-[3.5rem]' : '',
+    type === 'h2' ? 'text-4xl !leading-[3.5rem]' : '',
     type === 'h3' ? 'text-2xl' : '',
+    type === 'span' ? 'text-xs' : '',
   );
 
   const Typography = useCallback(() => {

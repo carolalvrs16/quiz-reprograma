@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { useRouter } from 'next/router';
 
 import {
   Text,
@@ -8,9 +10,16 @@ import {
 } from '../components';
 
 const Home: React.FC = () => {
+  const { push } = useRouter();
+
   const [date, onDate] = useState(null);
   const [next, onNext] = useState(false);
+  const [validate, onValidate] = useState(true);
   const [selected, onSelected] = useState('');
+
+  useEffect(() => {
+    if (date) onValidate(false);
+  }, [date]);
 
   return (
     <div className="home">
@@ -53,7 +62,7 @@ const Home: React.FC = () => {
           <Button
             label="Próximo"
             onClick={() => onNext(true)}
-            disabled={!selected || onDate === null}
+            disabled={validate}
             className="w-full mt-20"
           />
         </div>
@@ -76,7 +85,7 @@ const Home: React.FC = () => {
 
           <Button
             label="Entrar"
-            onClick={() => onNext(true)}
+            onClick={() => push('/quiz')}
             className="w-full max-w-[28rem]"
           />
         </div>
