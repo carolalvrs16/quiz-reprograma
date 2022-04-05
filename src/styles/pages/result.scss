@@ -1,0 +1,23 @@
+.result {
+  @apply items-center justify-center flex py-16;
+
+  &-avatar {
+    @apply w-12 h-12 object-cover rounded-2xl border-2 border-solid border-gray-600;
+  }
+
+  &-container {
+    @apply flex flex-col max-w-[30rem] items-center justify-center;
+  }
+
+  &-percentage {
+    @apply w-[9.5rem] h-[9.5rem] rounded-full absolute border-[10px] border-solid border-gray-600;
+  }
+
+  &-accordion {
+    @apply bg-gray-600 rounded p-6;
+  }
+
+  &-accordions {
+    @apply flex flex-col space-y-4;
+  }
+}

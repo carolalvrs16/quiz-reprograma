@@ -17,6 +17,7 @@ const Text: React.FC<TextHandles> = ({
     type === 'h1' ? 'text-5xl !leading-[3.5rem]' : '',
     type === 'h2' ? 'text-4xl !leading-[3.5rem]' : '',
     type === 'h3' ? 'text-2xl' : '',
+    type === 'p' ? 'text-p' : '',
     type === 'span' ? 'text-xs' : '',
   );
 

@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
+import moment from 'moment';
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import {
@@ -8,8 +10,11 @@ import {
   Select,
   Datepicker,
 } from '../components';
+import { useQuiz } from '../hooks';
+import { api } from '../services';
+import { HomeHandles } from '../types';
 
-const Home: React.FC = () => {
+const Home: React.FC<HomeHandles> = ({ data }) => {
   const { push } = useRouter();
 
   const [date, onDate] = useState(null);
@@ -20,6 +25,23 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (date) onValidate(false);
   }, [date]);
+
+  const { user, onUser } = useQuiz();
+
+  const login = useCallback(() => {
+    if (date && data && user) {
+      onUser({
+        date: moment(date).format('DD/MM/YYYY'),
+        avatar: data.results[0].picture.medium,
+        first_name: data?.results[0].name.first,
+        last_name: data?.results[0].name.last,
+      });
+    }
+
+    push('/quiz');
+  }, [push, data, date, user, onUser]);
+
+  if (!data) return <h1>Loading...</h1>;
 
   return (
     <div className="home">
@@ -85,13 +107,23 @@ const Home: React.FC = () => {
 
           <Button
             label="Entrar"
-            onClick={() => push('/quiz')}
+            onClick={login}
             className="w-full max-w-[28rem]"
           />
         </div>
       )}
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { data } = await api.get('/api');
+
+  return {
+    props: {
+      data,
+    },
+  };
 };
 
 export default Home;

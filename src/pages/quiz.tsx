@@ -1,100 +1,21 @@
 import { useMemo, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import {
   Text,
   Radio,
   Input,
   Button,
 } from '../components';
+import questions from '../data';
 
 const Quiz: React.FC = () => {
+  const { push } = useRouter();
+
   const [pos, onPos] = useState(0);
   const [sum, onSum] = useState(0);
   const [checked, onChecked] = useState(-1);
-
-  const questions = [
-    {
-      question: 'Prefiro fotografar lugares do que ler livros',
-      answers: [
-        {
-          value: 10,
-          label: 'Sim',
-        },
-        {
-          value: -10,
-          label: 'Não',
-        },
-        {
-          value: 0,
-          label: 'Os dois/nenhum dos dois',
-        },
-      ],
-    },
-    {
-      question: 'Acho melhor aplicativos/sites que sejam Lindos do que Rápido',
-      answers: [
-        {
-          value: 10,
-          label: 'Sim',
-        },
-        {
-          value: -10,
-          label: 'Não',
-        },
-        {
-          value: 0,
-          label: 'Igualmente importantes',
-        },
-      ],
-    },
-    {
-      question: 'Me enxergo mais como artista do que como uma engenheira',
-      answers: [
-        {
-          value: 10,
-          label: 'Sim',
-        },
-        {
-          value: -10,
-          label: 'Não',
-        },
-        {
-          value: 0,
-          label: 'Os dois/nenhum dos dois',
-        },
-      ],
-    },
-    {
-      question: 'Me apego tanto aos detalhes que às vezes demoro muito pra fazer minhas atividade',
-      answers: [
-        {
-          value: 10,
-          label: 'Sim',
-        },
-        {
-          value: -10,
-          label: 'Não',
-        },
-      ],
-    },
-    {
-      question: 'Prefiro História ou Ciências a Matemática ou Química',
-      answers: [
-        {
-          value: 10,
-          label: 'Sim',
-        },
-        {
-          value: -10,
-          label: 'Não',
-        },
-        {
-          value: 0,
-          label: 'Prefiro igualmente todas',
-        },
-      ],
-    },
-  ];
 
   const progress = useMemo(() => {
     if (pos !== 0) {
@@ -105,7 +26,16 @@ const Quiz: React.FC = () => {
     return '';
   }, [pos, sum]);
 
-  console.log(sum);
+  const click = () => {
+    if (pos === 4) {
+      push('/result');
+      return;
+    }
+
+    onSum(questions[pos].answers[checked].value + sum);
+    onPos(pos + 1);
+    onChecked(-1);
+  };
 
   return (
     <div className="quiz">
@@ -116,16 +46,16 @@ const Quiz: React.FC = () => {
         />
         <Text
           type="h2"
-          label={questions[pos].question}
+          label={questions[pos]?.question}
           className="mb-14"
         />
 
         <div className="w-full flex flex-col space-y-4">
-          {questions[pos].answers.map(({ value, label }, index) => (
+          {questions[pos]?.answers.map(({ value, label }, index) => (
             <Radio
               key={value}
               label={label}
-              name={questions[pos].question}
+              name={questions[pos]?.question}
               checked={index === checked}
               onChange={() => onChecked(index)}
             />
@@ -134,11 +64,7 @@ const Quiz: React.FC = () => {
 
         <Button
           label="Próximo"
-          onClick={() => {
-            onSum(questions[pos].answers[checked].value + sum);
-            onPos(pos + 1);
-            onChecked(-1);
-          }}
+          onClick={click}
           disabled={checked === -1}
           className="w-full mt-20"
         />
