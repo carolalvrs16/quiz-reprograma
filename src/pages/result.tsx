@@ -1,6 +1,7 @@
 import { useRef, useCallback } from 'react';
 
 import IconCalendar from '../assets/svgs/icon-calendar.svg';
+import IconChevron from '../assets/svgs/icon-chevron.svg';
 import { Text } from '../components';
 import questions from '../data';
 import { useQuiz } from '../hooks';
@@ -8,7 +9,7 @@ import { useQuiz } from '../hooks';
 const Result: React.FC = () => {
   const ref = useRef<HTMLDivElement[]>([]);
 
-  const { user } = useQuiz();
+  const { user, questions: question } = useQuiz();
 
   const accordion = useCallback((idx) => {
     if (ref.current) {
@@ -19,8 +20,6 @@ const Result: React.FC = () => {
   }, []);
 
   if (!user) return <h1>Loading...</h1>;
-
-  console.log(user);
 
   const name = `${user.first_name} ${user.last_name}`;
 
@@ -43,10 +42,10 @@ const Result: React.FC = () => {
             <Text
               type="h3"
               label={name}
-              className="mt-6 text-"
+              className="mt-6"
             />
 
-            <div className="flex items-center gap-2 mt-1">
+            <div className="flex items-center gap-2 mt-2">
               <IconCalendar />
               <Text
                 type="span"
@@ -57,20 +56,17 @@ const Result: React.FC = () => {
           </div>
 
           <div className="flex relative items-center justify-center">
-            <Text
-              type="h1"
-              label="80%"
-              className="!text-green relative"
-            />
-
-            <svg width="100%" height="100%" viewBox="0 0 42 42" className="donut">
-              <circle className="donut-hole" cx="21" cy="21" r="15.91549430918954" fill="transparent" />
-              <circle className="donut-ring" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#d2d3d4" strokeWidth="3" />
-
-              <circle className="donut-segment" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#ce4b99" strokeWidth="3" strokeDasharray="20 80" strokeDashoffset="25" />
-            </svg>
-
-            <div className="result-percentage-circle" />
+            <div className="result-circle">
+              <Text
+                type="h3"
+                label="80%"
+                className="!text-green"
+              />
+              <svg>
+                <circle className="bg" cx="57" cy="57" r="52" />
+                <circle className="progress" cx="57" cy="57" r="52" />
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -92,22 +88,31 @@ const Result: React.FC = () => {
             label="Suas respostas:"
             className="text-gray-500 mb-3 font-medium"
           />
-          {questions.map(({ question }, idx) => (
+          {questions.map((item, idx) => (
             <div
               ref={(refs) => {
                 if (ref.current) {
                   ref.current[idx] = refs as HTMLDivElement; //eslint-disable-line
                 }
               }}
-              key={question}
+              key={item.question}
               role="presentation"
               onClick={() => accordion(idx)}
               className="result-accordion"
             >
-              <div>
+              <div className="result-accordion-head">
                 <Text
-                  label={question}
+                  label={item.question}
                   className="font-medium text-gray-500"
+                />
+
+                <IconChevron className="result-accordion-head-chevron" />
+              </div>
+
+              <div className="result-accordion-body">
+                <Text
+                  label={`R: ${item.answers[question[idx]].label}`}
+                  className="text-white font-medium"
                 />
               </div>
             </div>

@@ -10,6 +10,6 @@ export type User = {
 export type QuizHandles = {
   user: User | null,
   onUser: Dispatch<SetStateAction<User | null>>
-  questions: string[] | null
-  onQuestions: Dispatch<SetStateAction<string[] | null>>
+  questions: number[] | null
+  onQuestions: Dispatch<SetStateAction<number[] | null>>
 };

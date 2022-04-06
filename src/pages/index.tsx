@@ -26,7 +26,7 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
     if (date) onValidate(false);
   }, [date]);
 
-  const { user, onUser } = useQuiz();
+  const { onUser } = useQuiz();
 
   const login = useCallback(() => {
     if (date && data) {
@@ -40,8 +40,6 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
       push('/quiz');
     }
   }, [push, data, date, onUser]);
-
-  console.log(data);
 
   if (!data) return <h1>Loading...</h1>;
 

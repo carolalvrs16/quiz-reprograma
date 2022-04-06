@@ -10,7 +10,7 @@ export const QuizContext = createContext({} as QuizHandles);
 
 export const QuizProvider: React.FC = ({ children }) => {
   const [user, onUser] = useState<User | null>(null);
-  const [questions, onQuestions] = useState(null);
+  const [questions, onQuestions] = useState<number[]>(null);
 
   const value = useMemo(() => ({
     user,

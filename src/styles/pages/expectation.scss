@@ -1,0 +1,11 @@
+.expectation {
+  @apply py-28 items-center justify-center flex h-screen;
+
+  &-container {
+    @apply flex flex-col max-w-[60rem] w-full h-full justify-between;
+  }
+
+  &-result {
+    @apply flex flex-col ml-auto items-end;
+  }
+}

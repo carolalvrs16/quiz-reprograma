@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import {
   Text,
   Radio,
-  Input,
   Button,
 } from '../components';
 import questions from '../data';
+import { useQuiz } from '../hooks';
 
 const Quiz: React.FC = () => {
   const { push } = useRouter();
@@ -16,6 +16,11 @@ const Quiz: React.FC = () => {
   const [pos, onPos] = useState(0);
   const [sum, onSum] = useState(0);
   const [checked, onChecked] = useState(-1);
+
+  const {
+    questions: question,
+    onQuestions,
+  } = useQuiz();
 
   const progress = useMemo(() => {
     if (pos !== 0) {
@@ -28,9 +33,14 @@ const Quiz: React.FC = () => {
 
   const click = () => {
     if (pos === 4) {
+      onQuestions((prev) => [...prev, checked]);
       push('/result');
       return;
     }
+
+    if (pos === 0) onQuestions([checked]);
+
+    if (pos !== 0) onQuestions((prev) => [...prev, checked]);
 
     onSum(questions[pos].answers[checked].value + sum);
     onPos(pos + 1);

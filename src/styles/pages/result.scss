@@ -1,12 +1,44 @@
 .result {
   @apply items-center justify-center flex py-16;
 
+  &-accordion {
+    &-head,
+    &-body,
+    &-head-chevron {
+      @apply transition-all duration-300 ease-in-out;
+    }
+
+    &-head {
+      @apply flex items-center gap-4 cursor-pointer justify-between;
+
+      &-chevron {
+        @apply w-4 h-4 min-w-[4rem];
+
+        transform: rotate(0deg);
+      }
+    }
+
+    &-body {
+      @apply flex p-0 h-0 opacity-0 pointer-events-none pt-2;
+    }
+
+    &.is-show & {
+      &-body {
+        @apply h-full relative opacity-100 pointer-events-auto pt-6;
+      }
+
+      &-head-chevron {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
   &-avatar {
     @apply w-12 h-12 object-cover rounded-2xl border-2 border-solid border-gray-600;
   }
 
   &-container {
-    @apply flex flex-col max-w-[30rem] items-center justify-center;
+    @apply flex flex-col max-w-[35rem] items-center justify-center;
   }
 
   &-percentage {
@@ -19,5 +51,43 @@
 
   &-accordions {
     @apply flex flex-col space-y-4;
+  }
+
+  &-circle {
+    @apply relative w-[8.75rem] h-[8.75rem];
+
+    margin: 30px auto 25px auto;
+
+    svg {
+      @apply w-[8.75rem] h-[8.75rem];
+    }
+
+    .bg {
+      @apply fill-[none] stroke-gray-600 stroke-[10];
+    }
+
+    .progress {
+      @apply fill-[none] stroke-green stroke-[10];
+
+      stroke-linecap: round;
+      stroke-dasharray: 326.56;
+      stroke-dashoffset: 60;
+      transform: rotate(-90deg);
+      transform-origin: 41% 41%;
+      animation: big 1.5s ease-in-out;
+    }
+
+    h3 {
+      @apply -left-[0.625rem] absolute w-full text-center top-[2.625rem];
+    }
+  }
+}
+
+@keyframes big {
+  from {
+    stroke-dashoffset: 326.56;
+  }
+  to {
+    stroke-dashoffset: 60;
   }
 }

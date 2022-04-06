@@ -1,6 +1,6 @@
 .quiz {
-  @apply items-center justify-center flex py-8;
-  
+  @apply items-center justify-center flex py-8 h-screen;
+
   &-container {
     @apply flex flex-col items-baseline max-w-[27rem];
   }
