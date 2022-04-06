@@ -18,7 +18,7 @@ const Quiz: React.FC = () => {
   const [checked, onChecked] = useState(-1);
 
   const {
-    questions: question,
+    onResult,
     onQuestions,
   } = useQuiz();
 
@@ -32,7 +32,10 @@ const Quiz: React.FC = () => {
   }, [pos, sum]);
 
   const click = () => {
+    onSum((prev) => questions[pos].answers[checked].value + prev);
+
     if (pos === 4) {
+      onResult(sum);
       onQuestions((prev) => [...prev, checked]);
       push('/result');
       return;
@@ -42,7 +45,6 @@ const Quiz: React.FC = () => {
 
     if (pos !== 0) onQuestions((prev) => [...prev, checked]);
 
-    onSum(questions[pos].answers[checked].value + sum);
     onPos(pos + 1);
     onChecked(-1);
   };

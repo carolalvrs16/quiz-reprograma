@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useMemo, useCallback } from 'react';
 
 import IconCalendar from '../assets/svgs/icon-calendar.svg';
 import IconChevron from '../assets/svgs/icon-chevron.svg';
@@ -9,7 +9,11 @@ import { useQuiz } from '../hooks';
 const Result: React.FC = () => {
   const ref = useRef<HTMLDivElement[]>([]);
 
-  const { user, questions: question } = useQuiz();
+  const {
+    user,
+    result,
+    questions: question,
+  } = useQuiz();
 
   const accordion = useCallback((idx) => {
     if (ref.current) {
@@ -19,9 +23,36 @@ const Result: React.FC = () => {
     }
   }, []);
 
+  const results = useMemo(() => {
+    if (result >= 0) {
+      const value = (result / 50) * 100;
+
+      return {
+        type: 'Front-End',
+        value,
+      };
+    }
+
+    if (result < 0) {
+      const value = ((result * -1) / 50) * 100;
+
+      return {
+        type: 'Back-End',
+        value,
+      };
+    }
+
+    return {
+      type: '',
+      value: 0,
+    };
+  }, [result]);
+
   if (!user) return <h1>Loading...</h1>;
 
   const name = `${user.first_name} ${user.last_name}`;
+
+  console.log(result);
 
   return (
     <div className="result">
@@ -59,7 +90,7 @@ const Result: React.FC = () => {
             <div className="result-circle">
               <Text
                 type="h3"
-                label="80%"
+                label={`${results.value}%`}
                 className="!text-green"
               />
               <svg>
@@ -78,7 +109,7 @@ const Result: React.FC = () => {
 
           <Text
             type="h1"
-            label="Desenvolvedora Front-End"
+            label={`Desenvolvedora ${results.type}`}
             className="text-center"
           />
         </div>
