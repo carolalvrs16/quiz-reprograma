@@ -29,17 +29,19 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
   const { user, onUser } = useQuiz();
 
   const login = useCallback(() => {
-    if (date && data && user) {
+    if (date && data) {
       onUser({
         date: moment(date).format('DD/MM/YYYY'),
         avatar: data.results[0].picture.medium,
         first_name: data?.results[0].name.first,
         last_name: data?.results[0].name.last,
       });
-    }
 
-    push('/quiz');
-  }, [push, data, date, user, onUser]);
+      push('/quiz');
+    }
+  }, [push, data, date, onUser]);
+
+  console.log(data);
 
   if (!data) return <h1>Loading...</h1>;
 

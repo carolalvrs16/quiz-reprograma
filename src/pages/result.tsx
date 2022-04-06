@@ -18,6 +18,10 @@ const Result: React.FC = () => {
     }
   }, []);
 
+  if (!user) return <h1>Loading...</h1>;
+
+  console.log(user);
+
   const name = `${user.first_name} ${user.last_name}`;
 
   return (
@@ -86,7 +90,7 @@ const Result: React.FC = () => {
         <div className="result-accordions">
           <Text
             label="Suas respostas:"
-            className="text-gray-500 mb-3"
+            className="text-gray-500 mb-3 font-medium"
           />
           {questions.map(({ question }, idx) => (
             <div
@@ -103,6 +107,7 @@ const Result: React.FC = () => {
               <div>
                 <Text
                   label={question}
+                  className="font-medium text-gray-500"
                 />
               </div>
             </div>
