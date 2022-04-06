@@ -62,8 +62,8 @@ const Result: React.FC = () => {
           label="Parabéns!"
           className="text-center mb-16"
         />
-        <div className="flex justify-between w-full">
-          <div className="flex flex-col">
+        <div className="result-content">
+          <div className="result-content-items">
             <img
               alt=""
               src={user.avatar}

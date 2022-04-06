@@ -1,0 +1,11 @@
+.text {
+  @media screen and (max-width: 560px) {
+    &-5xl {
+      @apply text-4xl #{!important};
+    }
+
+    &-4xl {
+      @apply text-3xl #{!important};
+    }
+  }
+}

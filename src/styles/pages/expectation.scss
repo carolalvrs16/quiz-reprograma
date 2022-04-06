@@ -8,4 +8,8 @@
   &-result {
     @apply flex flex-col ml-auto items-end;
   }
+
+  @media screen and (max-width: 991px) {
+    @apply px-6;
+  }
 }

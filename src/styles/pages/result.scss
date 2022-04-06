@@ -33,6 +33,14 @@
     }
   }
 
+  &-content {
+    @apply flex justify-between w-full;
+
+    &-items {
+      @apply flex flex-col;
+    }
+  }
+
   &-avatar {
     @apply w-12 h-12 object-cover rounded-2xl border-2 border-solid border-gray-600;
   }
@@ -79,6 +87,20 @@
 
     h3 {
       @apply -left-[0.625rem] absolute w-full text-center top-[2.625rem];
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    @apply px-6 py-10 h-full;
+  }
+
+  @media screen and (max-width: 560px) {
+    &-content {
+      @apply flex-col items-center;
+
+      &-items {
+        @apply items-center;
+      }
     }
   }
 }

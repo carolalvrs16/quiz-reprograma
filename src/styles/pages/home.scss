@@ -8,4 +8,8 @@
  &-title {
    @apply flex flex-col gap-8;
  }
+
+  @media screen and (max-width: 560px) {
+    @apply px-6 py-10 h-full;
+  }
 }
