@@ -19,12 +19,7 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
 
   const [date, onDate] = useState(null);
   const [next, onNext] = useState(false);
-  const [validate, onValidate] = useState(true);
   const [selected, onSelected] = useState('');
-
-  useEffect(() => {
-    if (date) onValidate(false);
-  }, [date]);
 
   const { onUser } = useQuiz();
 
@@ -84,7 +79,7 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
           <Button
             label="Próximo"
             onClick={() => onNext(true)}
-            disabled={validate}
+            disabled={!date}
             className="w-full mt-20"
           />
         </div>

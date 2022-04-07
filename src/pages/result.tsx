@@ -2,7 +2,7 @@ import { useRef, useMemo, useCallback } from 'react';
 
 import IconCalendar from '../assets/svgs/icon-calendar.svg';
 import IconChevron from '../assets/svgs/icon-chevron.svg';
-import { Text } from '../components';
+import { Text, Loading } from '../components';
 import questions from '../data';
 import { useQuiz } from '../hooks';
 
@@ -48,11 +48,9 @@ const Result: React.FC = () => {
     };
   }, [result]);
 
-  if (!user) return <h1>Loading...</h1>;
+  if (!user) return <Loading />;
 
   const name = `${user.first_name} ${user.last_name}`;
-
-  console.log(result);
 
   return (
     <div className="result">
