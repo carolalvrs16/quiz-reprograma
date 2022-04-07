@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import { useRouter } from 'next/router';
+import { format } from 'node:path/win32';
 
 import {
   Text,
@@ -18,8 +19,7 @@ const Quiz: React.FC = () => {
   const [checked, onChecked] = useState(-1);
 
   const {
-    onResult,
-    onQuestions,
+    formatAnswer,
   } = useQuiz();
 
   const progress = useMemo(() => {
@@ -32,18 +32,13 @@ const Quiz: React.FC = () => {
   }, [pos, sum]);
 
   const click = () => {
+    formatAnswer(checked, questions[pos].answers[checked].value);
     onSum((prev) => questions[pos].answers[checked].value + prev);
 
     if (pos === 4) {
-      onResult(sum);
-      onQuestions((prev) => [...prev, checked]);
       push('/result');
       return;
     }
-
-    if (pos === 0) onQuestions([checked]);
-
-    if (pos !== 0) onQuestions((prev) => [...prev, checked]);
 
     onPos(pos + 1);
     onChecked(-1);

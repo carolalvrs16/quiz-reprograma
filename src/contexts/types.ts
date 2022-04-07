@@ -7,11 +7,15 @@ export type User = {
   last_name: string,
 };
 
+export type Answer = {
+  id: number,
+  point: number,
+}[];
+
 export type QuizHandles = {
   user: User | null,
+  score: number,
   onUser: Dispatch<SetStateAction<User | null>>
-  result: number,
-  onResult: Dispatch<SetStateAction<number | null>>
-  questions: number[] | null
-  onQuestions: Dispatch<SetStateAction<number[] | null>>
+  answers: Answer,
+  formatAnswer: (answer: number, point: number) => void
 };

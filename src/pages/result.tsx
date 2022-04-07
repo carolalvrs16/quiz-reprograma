@@ -11,8 +11,8 @@ const Result: React.FC = () => {
 
   const {
     user,
-    result,
-    questions: question,
+    score,
+    answers,
   } = useQuiz();
 
   const accordion = useCallback((idx) => {
@@ -24,8 +24,8 @@ const Result: React.FC = () => {
   }, []);
 
   const results = useMemo(() => {
-    if (result >= 0) {
-      const value = (result / 50) * 100;
+    if (score >= 0) {
+      const value = (score / 50) * 100;
 
       return {
         type: 'Front-End',
@@ -33,8 +33,8 @@ const Result: React.FC = () => {
       };
     }
 
-    if (result < 0) {
-      const value = ((result * -1) / 50) * 100;
+    if (score < 0) {
+      const value = ((score * -1) / 50) * 100;
 
       return {
         type: 'Back-End',
@@ -46,7 +46,7 @@ const Result: React.FC = () => {
       type: '',
       value: 0,
     };
-  }, [result]);
+  }, [score]);
 
   if (!user) return <Loading />;
 
@@ -140,7 +140,7 @@ const Result: React.FC = () => {
 
               <div className="result-accordion-body">
                 <Text
-                  label={`R: ${item.answers[question[idx]].label}`}
+                  label={`R: ${item.answers[answers[idx].id].label}`}
                   className="text-white font-medium"
                 />
               </div>
