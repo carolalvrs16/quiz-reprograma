@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 import moment from 'moment';
 import { GetStaticProps } from 'next';
@@ -11,6 +11,7 @@ import {
   Datepicker,
 } from '../components';
 import { useQuiz } from '../hooks';
+import { Head } from '../layouts';
 import { api } from '../services';
 import { HomeHandles } from '../types';
 
@@ -40,6 +41,8 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
 
   return (
     <div className="home">
+      <Head />
+
       {!next ? (
         <div className="home-container">
           <div className="home-title">

@@ -58,6 +58,7 @@ module.exports = {
       alphabetize: { order: 'asc', ignoreCase: true },
     },
     ],
+    'jsx-a11y/anchor-is-valid': 'off',
   },
   settings: {
     'import/parsers': {

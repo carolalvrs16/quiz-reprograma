@@ -1,5 +1,5 @@
 .home {
-  @apply h-screen items-center justify-center flex;
+  @apply items-center justify-center flex py-28;
 
  &-container {
    @apply flex flex-col items-baseline max-w-[32rem];
