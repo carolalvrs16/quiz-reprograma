@@ -1,5 +1,5 @@
 .head {
-  @apply justify-end fixed flex z-[999] top-0 w-full py-6 px-16 transition-all duration-300 ease-in-out bg-gray-700;
+  @apply justify-end fixed flex z-[999] top-0 w-full py-6 px-16 transition-all duration-300 ease-in-out;
 
   &-translate {
     @apply flex flex-col relative cursor-pointer;
