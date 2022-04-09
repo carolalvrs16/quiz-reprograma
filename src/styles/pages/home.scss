@@ -1,5 +1,5 @@
 .home {
-  @apply items-center justify-center flex py-28;
+  @apply items-center justify-center flex py-28 flex-col;
 
  &-container {
    @apply flex flex-col items-baseline max-w-[32rem];

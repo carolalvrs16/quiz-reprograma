@@ -13,6 +13,12 @@ const Input: React.FC<InputHandles> = ({
       {...rest}
       className="input-target"
     />
+
+    {error && (
+      <span className="input-error">
+        {error}
+      </span>
+    )}
   </div>
 );
 

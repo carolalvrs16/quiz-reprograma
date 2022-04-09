@@ -1,7 +1,11 @@
 .input {
-  @apply flex flex-col gap-1 w-full;
+  @apply flex flex-col gap-1 w-full relative;
 
   &-target {
     @apply text-gray-400 text-sm p-4 w-full bg-gray-600 border border-gray-600 outline-none rounded-lg placeholder:text-gray-400 placeholder:text-sm cursor-pointer;
+  }
+
+  &-error {
+    @apply text-sm text-error absolute -bottom-5 right-0;
   }
 }

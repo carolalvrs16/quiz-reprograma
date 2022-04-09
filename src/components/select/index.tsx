@@ -4,6 +4,7 @@ import Input from '../input';
 import { SelectHandles } from './types';
 
 const Select: React.FC<SelectHandles> = ({
+  error,
   label,
   options,
   selected,
@@ -25,6 +26,7 @@ const Select: React.FC<SelectHandles> = ({
   return (
     <div className={`select ${className || ''}`}>
       <Input
+        error={error}
         label={label}
         onFocus={() => onFocus(true)}
         readOnly

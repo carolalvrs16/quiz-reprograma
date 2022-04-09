@@ -3,6 +3,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+import * as Yup from 'yup';
 
 import {
   Text,
@@ -21,9 +22,32 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
 
   const [date, onDate] = useState(null);
   const [next, onNext] = useState(false);
+  const [error, onError] = useState(false);
   const [selected, onSelected] = useState('');
 
   const { onUser } = useQuiz();
+
+  const submit = async () => {
+    Yup.object()
+      .shape({ selected: Yup.string().required('Este campo é obrigatório.') })
+      .validate({
+        selected,
+      }, {
+        abortEarly: false,
+      })
+      .then(() => onNext(true))
+      .catch((err) => {
+        if (err instanceof Yup.ValidationError) {
+          const messages: Record<string, string> = {};
+
+          err.inner.forEach((validate) => {
+            messages[validate.path || 0] = validate.message;
+          });
+
+          if (messages.selected) onError(messages.selected);
+        }
+      });
+  };
 
   const login = async () => {
     if (date) {
@@ -65,6 +89,7 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
           />
 
           <Select
+            error={error}
             label={home.form.fields.options.label}
             options={['Cis', 'Trans']}
             selected={selected}
@@ -82,7 +107,7 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
 
           <Button
             label={home.form.button}
-            onClick={() => onNext(true)}
+            onClick={submit}
             disabled={!date}
             className="w-full mt-20"
           />

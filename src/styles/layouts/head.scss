@@ -1,5 +1,5 @@
 .head {
-  @apply justify-end fixed flex z-[999] top-0 w-full py-6 px-16 transition-all duration-300 ease-in-out;
+  @apply justify-end flex w-full py-6 px-16 transition-all duration-300 ease-in-out absolute top-0;
 
   &-translate {
     @apply flex flex-col relative cursor-pointer;
@@ -29,7 +29,7 @@
     }
 
     &-dropdown {
-      @apply flex flex-col top-0 opacity-0 pointer-events-none absolute w-[7.25rem] p-2 -left-5 gap-3 border border-solid border-gray-500 rounded;
+      @apply bg-gray-700 flex flex-col top-0 opacity-0 pointer-events-none absolute w-[7.25rem] p-2 -left-5 gap-3 border border-solid border-gray-600 rounded;
 
       &.is-opened {
         @apply top-12 opacity-100 pointer-events-auto;

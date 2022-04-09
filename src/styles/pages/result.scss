@@ -1,5 +1,5 @@
 .result {
-  @apply items-center justify-center flex py-28;
+  @apply items-center justify-center flex py-28 flex-col;
 
   &-accordion {
     &-head,

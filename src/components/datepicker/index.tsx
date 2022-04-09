@@ -12,7 +12,8 @@ const Datepicker: React.FC<DatepickerHandles> = ({
   <DatePicker
     selected={start}
     onChange={(date) => onStart(date)}
-    customInput={<Input label={label} placeholder={placeholder} />}
+    placeholderText={placeholder}
+    customInput={<Input label={label} />}
   />
 );
 
