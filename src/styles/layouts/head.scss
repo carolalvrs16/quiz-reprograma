@@ -6,6 +6,18 @@
 
     &-top {
       @apply flex space-x-2 items-center;
+
+      svg:first-child {
+        @apply w-8 h-8;
+      }
+    }
+
+    &-item {
+      @apply flex items-center;
+
+      svg {
+        @apply w-8 h-8 mr-2;
+      }
     }
 
     &-chevron {

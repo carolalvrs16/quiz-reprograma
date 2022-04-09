@@ -1,19 +1,29 @@
 import { useRef, useMemo, useCallback } from 'react';
 
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+
 import IconCalendar from '../assets/svgs/icon-calendar.svg';
 import IconChevron from '../assets/svgs/icon-chevron.svg';
-import { Text, Loading } from '../components';
+import { Text } from '../components';
 import questions from '../data';
 import { useQuiz } from '../hooks';
+import { Head } from '../layouts';
+import * as locales from '../locales';
+import { ResultHandles } from '../types';
 
-const Result: React.FC = () => {
+const Result: React.FC<ResultHandles> = ({ result }) => {
   const ref = useRef<HTMLDivElement[]>([]);
+
+  console.log(result);
 
   const {
     user,
     score,
     answers,
   } = useQuiz();
+
+  const { locale } = useRouter();
 
   const accordion = useCallback((idx) => {
     if (ref.current) {
@@ -48,23 +58,25 @@ const Result: React.FC = () => {
     };
   }, [score]);
 
-  if (!user) return <Loading />;
+  // if (!user) return <Loading />;
 
-  const name = `${user.first_name} ${user.last_name}`;
+  const name = `${user?.first_name} ${user?.last_name}`;
 
   return (
     <div className="result">
+      <Head />
+
       <div className="result-container">
         <Text
           type="h1"
-          label="Parabéns!"
+          label={result.title}
           className="text-center mb-16"
         />
         <div className="result-content">
           <div className="result-content-items">
             <img
               alt=""
-              src={user.avatar}
+              src={user?.avatar}
               className="result-avatar"
             />
 
@@ -78,7 +90,7 @@ const Result: React.FC = () => {
               <IconCalendar />
               <Text
                 type="span"
-                label={user.date}
+                label={user?.date}
                 className="text-gray-500"
               />
             </div>
@@ -88,7 +100,7 @@ const Result: React.FC = () => {
             <div className="result-circle">
               <Text
                 type="h3"
-                label={`${results.value}%`}
+                label={`${results?.value}%`}
                 className="!text-green"
               />
               <svg>
@@ -101,23 +113,23 @@ const Result: React.FC = () => {
 
         <div className="flex flex-col justify-center mt-24 mb-20">
           <Text
-            label="Seu perfil é de:"
+            label={result.perfil.title}
             className="text-gray-500 text-center mb-3"
           />
 
           <Text
             type="h1"
-            label={`Desenvolvedora ${results.type}`}
+            label={`${result.perfil.subtitle} ${results?.type}`}
             className="text-center"
           />
         </div>
 
         <div className="result-accordions">
           <Text
-            label="Suas respostas:"
+            label={result.answers}
             className="text-gray-500 mb-3 font-medium"
           />
-          {questions.map((item, idx) => (
+          {questions[locale].map((item, idx) => (
             <div
               ref={(refs) => {
                 if (ref.current) {
@@ -140,7 +152,7 @@ const Result: React.FC = () => {
 
               <div className="result-accordion-body">
                 <Text
-                  label={`R: ${item.answers[answers[idx].id].label}`}
+                  label={`${result.tag}: ${item.answers[answers[idx]?.id]?.label}`}
                   className="text-white font-medium"
                 />
               </div>
@@ -151,6 +163,18 @@ const Result: React.FC = () => {
       </div>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const {
+    result,
+  } = locales;
+
+  return {
+    props: {
+      result: result[locale || 'pt'],
+    },
+  };
 };
 
 export default Result;

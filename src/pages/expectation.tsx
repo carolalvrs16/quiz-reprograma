@@ -1,28 +1,35 @@
-import { Text } from '../components';
+import { GetStaticProps } from 'next';
 
-const Expectation: React.FC = () => (
+import { Text } from '../components';
+import { Head } from '../layouts';
+import * as locales from '../locales';
+import { ExpectationHandles } from '../types';
+
+const Expectation: React.FC<ExpectationHandles> = ({ expectation }) => (
   <div className="expectation">
+    <Head />
+
     <div className="expectation-container">
       <div className="flex flex-col">
         <Text
           type="h1"
-          label="Pretensão Salarial"
+          label={expectation.title}
           className="mb-24"
         />
 
         <Text
-          label="Essa é a pretenção salarial para uma vaga PJ de 80h mensais."
+          label={expectation.subtitle}
           className="text-gray-500 mb-10"
         />
 
         <Text
-          label="Horário de trabalho:"
+          label={expectation.schedule}
           className="text-gray-300"
         />
 
         <div className="flex items-center justify-between mt-6 mb-4">
           <Text
-            label="Seg. à Sex."
+            label={expectation.days[0]}
             className="text-gray-500"
           />
           <Text
@@ -33,7 +40,7 @@ const Expectation: React.FC = () => (
 
         <div className="flex items-center justify-between">
           <Text
-            label="Sab. e Dom."
+            label={expectation.days[1]}
             className="text-gray-500"
           />
           <Text
@@ -45,7 +52,7 @@ const Expectation: React.FC = () => (
 
       <div className="expectation-result">
         <Text
-          label="Valor:"
+          label={expectation.value}
           className="text-gray-500"
         />
 
@@ -56,12 +63,24 @@ const Expectation: React.FC = () => (
         />
 
         <Text
-          label="*Estou aberta a negociações."
+          label={`*${expectation.negociation}`}
           className="text-gray-300"
         />
       </div>
     </div>
   </div>
 );
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const {
+    expectation,
+  } = locales;
+
+  return {
+    props: {
+      expectation: expectation[locale || 'pt'],
+    },
+  };
+};
 
 export default Expectation;

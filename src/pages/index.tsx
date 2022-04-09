@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 import moment from 'moment';
 import { GetStaticProps } from 'next';
@@ -12,10 +12,11 @@ import {
 } from '../components';
 import { useQuiz } from '../hooks';
 import { Head } from '../layouts';
+import * as locales from '../locales';
 import { api } from '../services';
-import { HomeHandles } from '../types';
+import { HomeHandles, DataHandles } from '../types';
 
-const Home: React.FC<HomeHandles> = ({ data }) => {
+const Home: React.FC<HomeHandles> = ({ home }) => {
   const { push } = useRouter();
 
   const [date, onDate] = useState(null);
@@ -24,20 +25,21 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
 
   const { onUser } = useQuiz();
 
-  const login = useCallback(() => {
-    if (date && data) {
-      onUser({
-        date: moment(date).format('DD/MM/YYYY'),
-        avatar: data.results[0].picture.medium,
-        first_name: data?.results[0].name.first,
-        last_name: data?.results[0].name.last,
-      });
+  const login = async () => {
+    if (date) {
+      await api.get('/api')
+        .then(({ data }: DataHandles) => {
+          onUser({
+            date: moment(date).format('DD/MM/YYYY'),
+            avatar: data.results[0].picture.medium,
+            first_name: data?.results[0].name.first,
+            last_name: data?.results[0].name.last,
+          });
 
-      push('/quiz');
+          push('/quiz');
+        });
     }
-  }, [push, data, date, onUser]);
-
-  if (!data) return <h1>Loading...</h1>;
+  };
 
   return (
     <div className="home">
@@ -47,40 +49,39 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
         <div className="home-container">
           <div className="home-title">
             <Text
-              label="Olá,"
+              label={home.title}
               type="h1"
             />
 
             <Text
-              label="Vamos ajudar você a
-            encontrar o curso ideal."
+              label={home.subtitle}
               type="h1"
             />
           </div>
 
           <Text
-            label="Preencha as informações abaixo, é rápido e fácil."
+            label={home.form.title}
             className="text-gray-400 mt-6 mb-14"
           />
 
           <Select
-            label="Identitade de Gênero"
+            label={home.form.fields.options.label}
             options={['Cis', 'Trans']}
             selected={selected}
             className="mb-8"
             onSelected={onSelected}
-            placeholder="Selecione uma opção"
+            placeholder={home.form.fields.options.placeholder}
           />
 
           <Datepicker
-            label="Data de nascimento"
+            label={home.form.fields.birh_date.label}
             start={date}
             onStart={onDate}
             placeholder="Selecione uma data"
           />
 
           <Button
-            label="Próximo"
+            label={home.form.button}
             onClick={() => onNext(true)}
             disabled={!date}
             className="w-full mt-20"
@@ -114,12 +115,14 @@ const Home: React.FC<HomeHandles> = ({ data }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get('/api');
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const {
+    home,
+  } = locales;
 
   return {
     props: {
-      data,
+      home: home[locale || 'pt'],
     },
   };
 };

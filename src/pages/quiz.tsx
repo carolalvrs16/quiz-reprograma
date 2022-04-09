@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { format } from 'node:path/win32';
 
 import {
   Text,
@@ -10,9 +10,12 @@ import {
 } from '../components';
 import questions from '../data';
 import { useQuiz } from '../hooks';
+import { Head } from '../layouts';
+import * as locales from '../locales';
+import { QuizHandles } from '../types';
 
-const Quiz: React.FC = () => {
-  const { push } = useRouter();
+const Quiz: React.FC<QuizHandles> = ({ quiz }) => {
+  const { push, locale } = useRouter();
 
   const [pos, onPos] = useState(0);
   const [sum, onSum] = useState(0);
@@ -32,8 +35,8 @@ const Quiz: React.FC = () => {
   }, [pos, sum]);
 
   const click = () => {
-    formatAnswer(checked, questions[pos].answers[checked].value);
-    onSum((prev) => questions[pos].answers[checked].value + prev);
+    formatAnswer(checked, questions[locale][pos].answers[checked].value);
+    onSum((prev) => questions[locale][pos].answers[checked].value + prev);
 
     if (pos === 4) {
       push('/result');
@@ -46,6 +49,8 @@ const Quiz: React.FC = () => {
 
   return (
     <div className="quiz">
+      <Head />
+
       <div className="quiz-container">
         <Text
           type="h2"
@@ -53,16 +58,16 @@ const Quiz: React.FC = () => {
         />
         <Text
           type="h2"
-          label={questions[pos]?.question}
+          label={questions[locale][pos]?.question}
           className="mb-14"
         />
 
         <div className="w-full flex flex-col space-y-4">
-          {questions[pos]?.answers.map(({ value, label }, index) => (
+          {questions[locale][pos]?.answers.map(({ value, label }, index) => (
             <Radio
               key={value}
               label={label}
-              name={questions[pos]?.question}
+              name={questions[locale][pos]?.question}
               checked={index === checked}
               onChange={() => onChecked(index)}
             />
@@ -70,7 +75,7 @@ const Quiz: React.FC = () => {
         </div>
 
         <Button
-          label="Próximo"
+          label={quiz.button}
           onClick={click}
           disabled={checked === -1}
           className="w-full mt-20"
@@ -80,7 +85,7 @@ const Quiz: React.FC = () => {
           <div className="mt-6 flex flex-col gap-2 items-center mx-auto">
             <Text
               type="span"
-              label="Seu perfil tende para:"
+              label={quiz.information}
               className="text-gray-500"
             />
             <Text
@@ -93,6 +98,18 @@ const Quiz: React.FC = () => {
       </div>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const {
+    quiz,
+  } = locales;
+
+  return {
+    props: {
+      quiz: quiz[locale || 'pt'],
+    },
+  };
 };
 
 export default Quiz;

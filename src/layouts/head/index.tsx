@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -16,30 +15,6 @@ const Head: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
-
-  const {
-    i18n,
-  } = useTranslation();
-
-  const locales = {
-    en: {
-      flag: <IconEn />,
-      label: 'EN-US',
-    },
-
-    pt: {
-      flag: <IconPt />,
-      label: 'PT-BR',
-    },
-  };
-
-  // const current = locales[i18n.languages[0]];
-
-  const selected = (key: string) => {
-    i18n.changeLanguage(key);
-
-    onOpen(false);
-  };
 
   const styled = {
     chevron: classNames(
@@ -62,14 +37,14 @@ const Head: React.FC = () => {
         className="head-translate"
       >
         <div className="head-translate-top">
-          {/* {current.flag} */}
-
+          $
+          {router.locale === 'en' ? <IconEn /> : <IconPt />}
           <IconChevron className={styled.chevron} />
         </div>
 
         <div ref={ref} className={styled.dropdown}>
           <Link href={router.asPath} locale="en">
-            <a className="flex items-center">
+            <a className="head-translate-item">
               <IconEn />
 
               <Text
@@ -80,7 +55,7 @@ const Head: React.FC = () => {
           </Link>
 
           <Link href={router.asPath} locale="pt">
-            <a className="flex items-center">
+            <a className="head-translate-item">
               <IconPt />
 
               <Text

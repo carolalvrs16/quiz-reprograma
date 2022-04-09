@@ -1,4 +1,6 @@
-export type HomeHandles = {
+import { HomeLocale } from '../locales';
+
+export type DataHandles = {
   data: {
     results: {
       name: {
@@ -9,5 +11,9 @@ export type HomeHandles = {
         medium: string,
       },
     }[],
-  }
+  },
+};
+
+export type HomeHandles = {
+  home: HomeLocale,
 };
