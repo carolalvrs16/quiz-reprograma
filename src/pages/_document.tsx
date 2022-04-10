@@ -10,6 +10,8 @@ import {
 const Document: React.FC = () => (
   <Html lang="pt-BR">
     <Head>
+      <title>Quiz with Next.js and PWA</title>
+
       <link rel="icon" type="image/png" href="/favicon.ico" />
 
       <link rel="apple-touch-icon" href="/apple-icon.png" />
@@ -25,8 +27,6 @@ const Document: React.FC = () => (
       />
       <meta name="description" content="Description" />
       <meta name="keywords" content="Keywords" />
-      <title>Quiz with Next.js and PWA</title>
-
       <link rel="manifest" href="/manifest.json" />
 
       <meta name="theme-color" content="#131419" />

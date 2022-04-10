@@ -1,6 +1,6 @@
 # quiz-reprograma
 
-Esse repositório contém uma plataforma Next.js para auxiliar mulheres trans e cis a decidirem se devem seguir na carreira de Front-End ou Back-End com base em seu perfil.
+Esse repositório contém uma plataforma Next.js utilizando PWA para auxiliar mulheres trans e cis a decidirem se devem seguir na carreira de Front-End ou Back-End com base em seu perfil.
 
 1 - Clone o repositório.
 ```bash

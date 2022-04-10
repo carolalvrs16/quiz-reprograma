@@ -1,15 +1,15 @@
 .home {
   @apply items-center justify-center flex py-28 flex-col;
 
- &-container {
-   @apply flex flex-col items-baseline max-w-[32rem];
- }
+  &-container {
+    @apply flex flex-col items-baseline max-w-[32rem];
+  }
 
- &-title {
-   @apply flex flex-col gap-8;
- }
+  &-title {
+    @apply flex flex-col gap-8;
+  }
 
   @media screen and (max-width: 560px) {
-    @apply px-6 py-10 h-full;
+    @apply px-6 py-20 h-full;
   }
 }
