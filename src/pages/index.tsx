@@ -22,7 +22,7 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
 
   const [date, onDate] = useState(null);
   const [next, onNext] = useState(false);
-  const [error, onError] = useState(false);
+  const [error, onError] = useState<string | boolean>();
   const [selected, onSelected] = useState('');
 
   const { onUser } = useQuiz();
@@ -89,6 +89,7 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
           />
 
           <Select
+            id="identity"
             error={error}
             label={home.form.fields.options.label}
             options={['Cis', 'Trans']}
@@ -99,6 +100,7 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
           />
 
           <Datepicker
+            id="birth"
             label={home.form.fields.birh_date.label}
             start={date}
             onStart={onDate}
@@ -106,6 +108,7 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
           />
 
           <Button
+            id="button-submit"
             label={home.form.button}
             onClick={submit}
             disabled={!date}
@@ -130,6 +133,7 @@ const Home: React.FC<HomeHandles> = ({ home }) => {
           />
 
           <Button
+            id="button-login"
             label="Entrar"
             onClick={login}
             className="w-full max-w-[28rem]"

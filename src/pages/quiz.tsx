@@ -75,6 +75,7 @@ const Quiz: React.FC<QuizHandles> = ({ quiz }) => {
         </div>
 
         <Button
+          id="button"
           label={quiz.button}
           onClick={click}
           disabled={checked === -1}

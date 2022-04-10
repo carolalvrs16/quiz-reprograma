@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export type SelectHandles = {
-  error?: boolean,
+  id?: string,
+  error?: boolean | string,
   label?: string,
   options: string[],
   selected: string,

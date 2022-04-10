@@ -37,7 +37,6 @@ const Head: React.FC = () => {
         className="head-translate"
       >
         <div className="head-translate-top">
-          $
           {router.locale === 'en' ? <IconEn /> : <IconPt />}
           <IconChevron className={styled.chevron} />
         </div>

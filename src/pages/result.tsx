@@ -1,4 +1,9 @@
-import { useRef, useMemo, useCallback } from 'react';
+import {
+  useRef,
+  useMemo,
+  useEffect,
+  useCallback,
+} from 'react';
 
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
@@ -15,15 +20,13 @@ import { ResultHandles } from '../types';
 const Result: React.FC<ResultHandles> = ({ result }) => {
   const ref = useRef<HTMLDivElement[]>([]);
 
-  console.log(result);
-
   const {
     user,
     score,
     answers,
   } = useQuiz();
 
-  const { locale } = useRouter();
+  const { push, locale } = useRouter();
 
   const accordion = useCallback((idx) => {
     if (ref.current) {
@@ -58,7 +61,9 @@ const Result: React.FC<ResultHandles> = ({ result }) => {
     };
   }, [score]);
 
-  // if (!user) return <Loading />;
+  useEffect(() => {
+    if (!user) push('/');
+  }, [user, push]);
 
   const name = `${user?.first_name} ${user?.last_name}`;
 
@@ -99,6 +104,7 @@ const Result: React.FC<ResultHandles> = ({ result }) => {
           <div className="flex relative items-center justify-center">
             <div className="result-circle">
               <Text
+                id="result-value"
                 type="h3"
                 label={`${results?.value}%`}
                 className="!text-green"
@@ -118,6 +124,7 @@ const Result: React.FC<ResultHandles> = ({ result }) => {
           />
 
           <Text
+            id="result-type"
             type="h1"
             label={`${result.perfil.subtitle} ${results?.type}`}
             className="text-center"

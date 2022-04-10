@@ -4,6 +4,7 @@ import Input from '../input';
 import { SelectHandles } from './types';
 
 const Select: React.FC<SelectHandles> = ({
+  id,
   error,
   label,
   options,
@@ -26,6 +27,7 @@ const Select: React.FC<SelectHandles> = ({
   return (
     <div className={`select ${className || ''}`}>
       <Input
+        id={id}
         error={error}
         label={label}
         onFocus={() => onFocus(true)}
