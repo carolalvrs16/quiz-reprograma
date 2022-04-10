@@ -4,5 +4,5 @@ export type DatepickerHandles = {
   start: Date,
   onStart: (e: Date) => void,
   className?: string
-  placeholder: string
+  placeholder?: string
 };

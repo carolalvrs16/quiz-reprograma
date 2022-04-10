@@ -5,6 +5,7 @@ import {
   useCallback,
 } from 'react';
 
+import moment from 'moment';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
@@ -66,6 +67,10 @@ const Result: React.FC<ResultHandles> = ({ result }) => {
   }, [user, push]);
 
   const name = `${user?.first_name} ${user?.last_name}`;
+
+  // const years = moment().diff('1981-01-01', user.date);
+
+  // console.log(years);
 
   return (
     <div className="result">

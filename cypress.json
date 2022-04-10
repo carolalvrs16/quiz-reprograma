@@ -1,3 +1,8 @@
 {
-  "baseUrl": "http://localhost:3000"
+  "env": {
+    "coverage": true
+  },
+  "video": false,
+  "baseUrl": "http://localhost:3000",
+  "componentFolder": "cypress/components"
 }
