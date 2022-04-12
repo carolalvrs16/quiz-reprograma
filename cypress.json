@@ -3,6 +3,6 @@
     "coverage": true
   },
   "video": false,
-  "baseUrl": "http://localhost:3000",
+  "baseUrl": "https://quiz-reprograma.vercel.app",
   "componentFolder": "cypress/components"
 }
